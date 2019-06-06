@@ -1,3 +1,88 @@
-<p>
-  reactive works!
-</p>
+<div class="container">
+
+  <div>
+    <h2>1. Simple input </h2>
+    <label>
+      Name :
+      <input type="text" [formControl]="name" />
+    </label>
+
+    <p>
+      Value : {{ name.value }}
+    </p>
+
+    <button (click)="updateName()">Update name</button>
+  </div>
+
+  <div>
+    <h2>2. Form Groups </h2>
+    <form [formGroup]="nameForm" (ngSubmit)="formSubmitted()">
+      <label>
+        First name :
+        <input type="text" formControlName="firstName" />
+      </label>
+      <br>
+      <label>
+        Last name :
+        <input type="text" formControlName="lastName" />
+      </label>
+      <br>
+      <button type="submit">Submit name</button>
+    </form>
+  </div>
+
+  <div>
+    <h2>3. Nested Groups </h2>
+    <form [formGroup]="profileForm" (ngSubmit)="profileFormSubmitted()">
+      <label>
+        Name :
+        <input type="text" formControlName="name" />
+      </label>
+      <br>
+      <div formGroupName="address">
+        <h4>Address</h4>
+        <label>
+          City :
+          <input type="text" formControlName="city" />
+        </label>
+        <br>
+        <label>
+          Zip :
+          <input type="text" formControlName="zip" />
+        </label>
+      </div>
+      <br>
+      <button type="submit">Submit name</button>
+    </form>
+  </div>
+
+  <div>
+    <h2>4. Using form builder </h2>
+    <form [formGroup]="fbprofileForm" (ngSubmit)="fbProfileFormSubmitted()">
+      <label>
+        Name :
+        <input type="text" formControlName="fbname" />
+      </label>
+      <br>
+      <div formGroupName="fbaddress">
+        <h4>Address</h4>
+        <label>
+          City :
+          <input type="text" formControlName="fbcity" />
+        </label>
+        <br>
+        <label>
+          Zip :
+          <input type="text" formControlName="fbzip" />
+        </label>
+      </div>
+      <br>
+      <button [disabled]="fbprofileForm.status === 'INVALID'" type="submit">Submit name</button>
+    </form>
+
+    <p>
+      Status : {{ fbprofileForm.status }}
+    </p>
+  </div>
+
+</div>
